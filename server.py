@@ -15,7 +15,7 @@ app.add_middleware(
 @app.post("/")
 async def handle_request(data: Request):
     data = await data.body()
-    data = type(data.decode('utf-8'))
+    data = data.decode('utf-8')
     with open('response.txt', 'a') as file:
         file.write(data + '\n')
         
