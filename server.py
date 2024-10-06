@@ -6,8 +6,8 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://127.0.0.1:5500"],
-    allow_credentials=True,
+    allow_origins=["*"],
+    # allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -15,8 +15,9 @@ app.add_middleware(
 @app.post("/")
 async def handle_request(data: Request):
     data = await data.body()
+    data = type(data.decode('utf-8'))
     with open('response.txt', 'a') as file:
-        file.write(str(data) + '\n')
+        file.write(data + '\n')
         
     return {"status": "success"}
 
